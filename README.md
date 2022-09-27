@@ -5,15 +5,41 @@
 * 套件
   * pip 10.0.0：為Python內建的套件管理
   * jupyter notebook 4.4.0
-  * requests：對網路發動請求的套件，可實作對網頁做get、post等HTTP協定的行為
+  * requests：對網路發動請求的套件，可實作對網頁做 get、post 等 HTTP 協定的行為
   * beautifulsoup4：借助網頁的結構特性來解析網頁的工具，只需要簡單的幾條指令就可以提取HTML標籤裡的元素
+<br>
+
+
+## 重要介紹
+* 搭配使用工具
+  * Webdriver 
+    * 不同瀏覽器會有不同的 driver，如[Chrome](https://chromedriver.chromium.org/downloads)、[Edge](https://developer.microsoft.com/zh-tw/microsoft-edge/tools/webdriver/)、[Firefox]()、[Safari](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari)，需下載目前瀏覽器版本的 Webdriver
+  * Chromedriver：其他瀏覽器類似
+    ```
+    # 載入需要的套件
+    from selenium import webdriver
+    
+    # 開啟瀏覽器視窗(Chrome)
+    # 方法一：執行前需開啟chromedriver.exe且與執行檔在同一個工作目錄
+    driver = webdriver.Chrome()
+    # 方法二：或是直接指定exe檔案路徑
+    driver = webdriver.Chrome('桌面\chromedriver')
+    
+    # get()：輸入網址，即可前往特定網頁
+    driver.get('http://www.google.com') # 更改網址以前往不同網頁
+    # close()：可關閉目前網頁視窗
+    driver.close() # 關閉瀏覽器視窗
+    ```
+* 套件
+  * Selenium
+    * 介紹：提供簡單的 API(Application Programming Interface) 應用程式介面
 <br>
 
 
 ## 範例
 * PTT資訊版
-  * 網址：https://www.ptt.cc/bbs/MobileComm/index.html
   * 範例一：文章標題
+    * 網址：https://www.ptt.cc/bbs/MobileComm/index.html
     * import Python套件
       ```
       import requests
@@ -59,6 +85,43 @@
   * 範例三：遇到按鈕
     * 進入網站後會看到讓使用者點選「是否已滿18歲」按鈕
     * 先開啟瀏覽器開發者模式(F12)，並點選至network(網路)，觀察點選「已滿18歲」後，會送給伺服器之封包內容
+* 範例：模擬點擊
+  ```
+  from selenium import webdriver
+  
+  driver = webdriver.Chrome()
+  driver.get('http://www.google.com') # 更改網址以前往不同網頁
+  ```
+  ```
+  # 情境一：搜尋輸入
+  # 定位搜尋框
+  element = driver.find_element(by=By.CLASS_NAME, value='gLFyf.gsfi')
+
+  # 傳入字串
+  element.send_keys('Selenium Python')
+  
+  # 點擊搜尋按鈕
+  button = driver.find_element(by=By.CLASS_NAME, value='gNO89b')
+  button.click()
+  ```
+  ```
+  # 情境二：刪除輸入
+  # 定位搜尋框
+  element = driver.find_element(by=By.CLASS_NAME, value='gLFyf.gsfi')
+
+  # 傳入字串
+  element.send_keys('Selenium Python')
+  
+  # 刪除原本已輸入的文字
+  element.clear()
+  ```
+  ```
+  # 瀏覽網頁的瀏覽紀錄
+  # 前往下一項
+  driver.forward()
+  # 前往上一項
+  driver.back()
+  ```
 <br>
 
 
