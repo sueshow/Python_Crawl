@@ -53,7 +53,16 @@
           * 用於在 XML 文檔中定位節點的語言(想像網頁是圖書館，而各個網頁元素是書籍，XPath 就有點類似於目錄編號，可以直接查找)
           * 原因：當想要查找的元素沒有合適的 id 或 name 屬性時，可以使用 XPath 以絕對路徑(不建議使用)定位元素，也可以利用已知特殊 id 或 name 屬性的元素的相對路徑定位
           * XPath 包含來自 HTML 所有元素的位置(絕對路徑)，因此，僅對網頁進行一點點調整就可能導致失敗(超級容易失敗，要不斷維護)
+          * 步驟
+            * 打開網頁檢視器，找到目標網頁元素的內容
+            * 在內容上點擊右鍵 → Copy→Copy (full) XPath，獲取絕對或相對 XPath
+            * 將複製下來的 XPath 貼上
         * CSS_SELECTOR = css_selector
+          * 「/」改寫成「>」
+          * 「//」改寫成「 (空格)」
+          * 用 id 查找「#」
+          * 用 classname 查找「.」
+          * 參考網頁：[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)
         * 重點說明
           
     * 使用方法
