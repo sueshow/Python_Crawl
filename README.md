@@ -31,8 +31,8 @@
     driver.close() # 關閉瀏覽器視窗
     ```
   * 打開網頁檢視器，網頁看得到的內容一定抓得下來
-    * Windows：請按f12
-    * macOS：請按option+command+c
+    * Windows：請按 f12、ctrl+shift+i
+    * macOS：請按 option+command+c
 * 套件
   * Selenium
     * 介紹：提供簡單的 API(Application Programming Interface) 應用程式介面
