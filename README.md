@@ -125,5 +125,23 @@
 <br>
 
 
+## 查詢
+* Windows
+  * 檢視 IP Address
+    * 指令：ipconfig
+    * 結果：如果 IP Address 顯示為 0.0.0.0 或 169.x.x.x 則無法上網
+  * 測試網站是否活著
+    * 指令：ping 目的地網站名稱或IP Address
+    * 結果：如果出現 Request timed out. 就表示該網站和我們電腦間的網路連線無法建立
+  * 追蹤網路路徑
+    * 指令：tracert 目的地網站名稱或IP Address
+  * 測試網頁服務(HTTP)
+    * 指令：
+      * telnet 目的地網站名稱或IP Address 80
+      * telnet 目的地網站名稱或IP Address 443
+<br>
+
+
 ## 參考資料
 * [Python爬蟲小人生](https://ithelp.ithome.com.tw/articles/10202121)
+* [網路問題判斷](http://wiki.kmu.edu.tw/index.php/%E7%B6%B2%E8%B7%AF%E5%95%8F%E9%A1%8C%E5%88%A4%E6%96%B7)
