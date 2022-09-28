@@ -43,12 +43,18 @@
       * 八種方法
         * ID = id
         * CLASS_NAME = class_name
+          * 字串內有空格的話要改為「.」
         * NAME = name
         * LINK_TEXT = link_text
         * PARTIAL_LINK_TEXT = partial_link_text
         * TAG_NAME = tag_name
+          * 使用 TAG 選擇器特別要注意的是，HTML 標籤時常重複，因此 TAG 選擇器通常適用於抓取大框架的網頁元素再做細部搜尋
         * XPATH = xpath
+          * 用於在 XML 文檔中定位節點的語言(想像網頁是圖書館，而各個網頁元素是書籍，XPath 就有點類似於目錄編號，可以直接查找)
+          * 原因：當想要查找的元素沒有合適的 id 或 name 屬性時，可以使用 XPath 以絕對路徑(不建議使用)定位元素，也可以利用已知特殊 id 或 name 屬性的元素的相對路徑定位
         * CSS_SELECTOR = css_selector
+        * 重點說明
+          
     * 使用方法
       ```
       
