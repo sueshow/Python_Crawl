@@ -63,12 +63,6 @@
           * 用 id 查找「#」
           * 用 classname 查找「.」
           * 參考網頁：[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)
-        * 重點說明
-          
-    * 使用方法
-      ```
-      
-      ```
 <br>
 
 
