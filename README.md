@@ -139,6 +139,12 @@
     * 指令：
       * telnet 目的地網站名稱或IP Address 80
       * telnet 目的地網站名稱或IP Address 443
+* Linux
+  * 測試網站是否活著
+    * 指令：ping 目的地網站名稱或IP Address
+    * 停止輸出：ctrl+c
+  * 追蹤網路路徑
+    * 指令：traceroute 目的地網站名稱或IP Address
 <br>
 
 
