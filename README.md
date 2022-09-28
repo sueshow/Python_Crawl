@@ -30,9 +30,29 @@
     # close()：可關閉目前網頁視窗
     driver.close() # 關閉瀏覽器視窗
     ```
+  * 打開網頁檢視器，網頁看得到的內容一定抓得下來
+    * Windows：請按f12
+    * macOS：請按option+command+c
 * 套件
   * Selenium
     * 介紹：提供簡單的 API(Application Programming Interface) 應用程式介面
+    * 使用規則
+      * 兩種函數
+        * find_element：抓取符合條件的第一個項目，可搭配 By 方法
+        * find_elements：抓取所有符合條件的項目，並回傳成 list
+      * 八種方法
+        * ID = id
+        * CLASS_NAME = class_name
+        * NAME = name
+        * LINK_TEXT = link_text
+        * PARTIAL_LINK_TEXT = partial_link_text
+        * TAG_NAME = tag_name
+        * XPATH = xpath
+        * CSS_SELECTOR = css_selector
+    * 使用方法
+      ```
+      
+      ```
 <br>
 
 
@@ -150,4 +170,5 @@
 
 ## 參考資料
 * [Python爬蟲小人生](https://ithelp.ithome.com.tw/articles/10202121)
+* [Selenium教學：如何使用find_element(s)取得任何網頁上能看到的內容](https://medium.com/marketingdatascience/%E5%8B%95%E6%85%8B%E7%B6%B2%E9%A0%81%E7%88%AC%E8%9F%B2%E7%AC%AC%E4%BA%8C%E9%81%93%E9%8E%96-selenium%E6%95%99%E5%AD%B8-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8find-element-s-%E5%8F%96%E5%BE%97%E7%B6%B2%E9%A0%81%E5%85%83%E7%B4%A0-%E9%99%84python-%E7%A8%8B%E5%BC%8F%E7%A2%BC-b66920fc8cab)
 * [網路問題判斷](http://wiki.kmu.edu.tw/index.php/%E7%B6%B2%E8%B7%AF%E5%95%8F%E9%A1%8C%E5%88%A4%E6%96%B7)
