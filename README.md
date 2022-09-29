@@ -1,12 +1,9 @@
 # Python_Crawl
 
-## 環境
-* Python 3.6.6
-* 套件
+## 環境及套件版本
+  * Python 3.6.6
   * pip 10.0.0：為Python內建的套件管理
   * jupyter notebook 4.4.0
-  * requests：對網路發動請求的套件，可實作對網頁做 get、post 等 HTTP 協定的行為
-  * beautifulsoup4：借助網頁的結構特性來解析網頁的工具，只需要簡單的幾條指令就可以提取HTML標籤裡的元素
 <br>
 
 
@@ -76,14 +73,14 @@
       
       res.text
       ```
-    * 介紹：請求網站獲取網頁數據
+    * 介紹：對網路發動請求的套件，可實作對網頁做 get、post 等 HTTP 協定的行為，請求網站獲取網頁數據
   * BeautifulSoup
     * 指令：
       ```
       soup = BeautifulSoup(res.text, 'html.parser')
       infos = soup.select('路徑')  #路徑提取方式：在固定位置右鍵->copy->copy selector
       ```
-    * 介紹：將 Requests 提取的網頁進行解析，得到結構化的數據
+    * 介紹：借助網頁的結構特性來解析網頁的工具，可透過 Requests 提取 HTML 標籤裡的元素，對網頁進行解析得到結構化的數據
   * Lxml
     * 指令：
       ```
@@ -92,6 +89,26 @@
       infos = Html.xpath('路徑')  #路徑提取方式：在固定位置右鍵->copy->copy xpath
       ```
     * 介紹：Lxml 為 XML 解析庫，可修正 HTML 代碼，形成結構化的 HTML 結構
+* 重要查詢
+  * 查詢設定：conda config --show
+  * 查詢 proxy
+    ```
+    import urllib
+    urllib.request.getproxies()
+    ```
+* 重要說明
+  * headers：用來讓瀏覽器向伺服器表明自己的身分，有些 HTTP 伺服器僅允許來自普通瀏覽器的請求，而不接受來自程式腳本的請求
+    * 經常用於「偽裝」User-Agent
+    * Mozilla Firefox 的 header 的值為 "Mozilla/5.0 (X11; U; Linux i686) Gecko/20071127 Firefox/2.0.0.11"
+    * urllib 的 header 的值為 "Python-urllib/2.6"
+    * 執行方式：Mozilla、AppleWebKit、Chrome，解析網頁：用 text/html 的方式，以 UTF-8 的格式去做解析
+      ```
+      headers = {
+         'content-type': 'text/html; charset=UTF-8',
+         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
+      }
+      ```
+  * https://stevenjhu.com/2022/02/13/python%E7%88%AC%E8%9F%B2web-crawler-%E6%93%8D%E4%BD%9C-cookie%E3%80%81request-headers/
 <br>
 
 
@@ -144,6 +161,7 @@
   * 範例三：遇到按鈕
     * 進入網站後會看到讓使用者點選「是否已滿18歲」按鈕
     * 先開啟瀏覽器開發者模式(F12)，並點選至network(網路)，觀察點選「已滿18歲」後，會送給伺服器之封包內容
+
 * 範例：模擬點擊
   ```
   from selenium import webdriver
@@ -213,3 +231,4 @@
 * [Selenium教學：如何使用find_element(s)取得任何網頁上能看到的內容](https://medium.com/marketingdatascience/%E5%8B%95%E6%85%8B%E7%B6%B2%E9%A0%81%E7%88%AC%E8%9F%B2%E7%AC%AC%E4%BA%8C%E9%81%93%E9%8E%96-selenium%E6%95%99%E5%AD%B8-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8find-element-s-%E5%8F%96%E5%BE%97%E7%B6%B2%E9%A0%81%E5%85%83%E7%B4%A0-%E9%99%84python-%E7%A8%8B%E5%BC%8F%E7%A2%BC-b66920fc8cab)
 * [網路問題判斷](http://wiki.kmu.edu.tw/index.php/%E7%B6%B2%E8%B7%AF%E5%95%8F%E9%A1%8C%E5%88%A4%E6%96%B7)
 * [Python爬虫基础库和实践](https://blog.csdn.net/weixin_39618456/article/details/112153519)
+* [用來開啟 URLs 的可擴充函式庫](https://docs.python.org/zh-tw/3/library/urllib.request.html)
