@@ -35,6 +35,7 @@
     * macOS：請按 option+command+c
 * 套件
   * Selenium
+    * 指令：
     * 介紹：提供簡單的 API(Application Programming Interface) 應用程式介面
     * 使用規則
       * 兩種函數
@@ -63,6 +64,34 @@
           * 用 id 查找「#」
           * 用 classname 查找「.」
           * 參考網頁：[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)
+  * Requests
+    * 指令：
+      ```
+      res = requests.get(url)
+      > 返回 200：請求成功
+      > 返回 404、400：請求失敗
+      
+      res = requests.get(url, headers=headers)
+      # 請求頭信息偽裝為瀏覽器，可以更好地請求數據信息
+      
+      res.text
+      ```
+    * 介紹：請求網站獲取網頁數據
+  * BeautifulSoup
+    * 指令：
+      ```
+      soup = BeautifulSoup(res.text, 'html.parser')
+      infos = soup.select('路徑')  #路徑提取方式：在固定位置右鍵->copy->copy selector
+      ```
+    * 介紹：將 Requests 提取的網頁進行解析，得到結構化的數據
+  * Lxml
+    * 指令：
+      ```
+      From lxml import etree
+      Html = etree.HTML(text)
+      infos = Html.xpath('路徑')  #路徑提取方式：在固定位置右鍵->copy->copy xpath
+      ```
+    * 介紹：Lxml 為 XML 解析庫，可修正 HTML 代碼，形成結構化的 HTML 結構
 <br>
 
 
