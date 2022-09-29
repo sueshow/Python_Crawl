@@ -109,6 +109,7 @@
       }
       ```
   * https://stevenjhu.com/2022/02/13/python%E7%88%AC%E8%9F%B2web-crawler-%E6%93%8D%E4%BD%9C-cookie%E3%80%81request-headers/
+  * https://www.learncodewithmike.com/2020/06/how-to-scrape-different-pages-using-python-scraper.html
 <br>
 
 
