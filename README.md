@@ -35,15 +35,17 @@
     * 指令：
     * 介紹：提供簡單的 API(Application Programming Interface) 應用程式介面
     * 使用規則
-      * 兩種函數
+      * 兩種函數找出 WebElement
         * find_element：抓取符合條件的第一個項目，可搭配 By 方法
         * find_elements：抓取所有符合條件的項目，並回傳成 list
       * 八種方法
         * ID = id
         * CLASS_NAME = class_name
+          * 透過標籤的 class 屬性搜尋
           * 字串內有空格的話要改為「.」
         * NAME = name
         * LINK_TEXT = link_text
+          * 透過連結標籤的文字搜尋
         * PARTIAL_LINK_TEXT = partial_link_text
         * TAG_NAME = tag_name
           * 使用 TAG 選擇器特別要注意的是，HTML 標籤時常重複，因此 TAG 選擇器通常適用於抓取大框架的網頁元素再做細部搜尋
