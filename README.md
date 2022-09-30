@@ -63,6 +63,17 @@
           * 用 id 查找「#」
           * 用 classname 查找「.」
           * 參考網頁：[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)
+      * 取得標籤的資訊
+        * 取得標籤的內部文字
+          ```
+          element = driver.find_element(搜尋欄位, '搜尋條件')
+          element.text
+          ```
+        * 取得標籤的某個屬性
+          ```
+          element = driver.find_element(搜尋欄位, '搜尋條件')
+          element.get_attribute('屬性名稱')
+          ```
   * Requests
     * 指令：
       ```
