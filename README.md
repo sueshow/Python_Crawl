@@ -74,6 +74,11 @@
           element = driver.find_element(搜尋欄位, '搜尋條件')
           element.get_attribute('屬性名稱')
           ```
+        * 模擬使用者點擊標籤
+          ```
+          element = driver.find_element(搜尋欄位, '搜尋條件')
+          element.click()
+          ```
   * Requests
     * 指令：
       ```
