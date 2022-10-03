@@ -1,12 +1,9 @@
-# Python_Crawl
+# Crawl
 
-## 環境
-* Python 3.6.6
-* 套件
+## 環境及套件版本
+  * Python 3.6.6
   * pip 10.0.0：為Python內建的套件管理
   * jupyter notebook 4.4.0
-  * requests：對網路發動請求的套件，可實作對網頁做 get、post 等 HTTP 協定的行為
-  * beautifulsoup4：借助網頁的結構特性來解析網頁的工具，只需要簡單的幾條指令就可以提取HTML標籤裡的元素
 <br>
 
 
@@ -30,9 +27,107 @@
     # close()：可關閉目前網頁視窗
     driver.close() # 關閉瀏覽器視窗
     ```
+  * 打開網頁檢視器，網頁看得到的內容一定抓得下來
+    * Windows：請按 f12、ctrl+shift+i
+    * macOS：請按 option+command+c
 * 套件
   * Selenium
+    * 指令：
     * 介紹：提供簡單的 API(Application Programming Interface) 應用程式介面
+    * 使用規則
+      * 兩種函數找出 WebElement
+        * find_element：抓取符合條件的第一個項目，可搭配 By 方法
+        * find_elements：抓取所有符合條件的項目，並回傳成 list
+      * 八種方法
+        * ID = id
+        * CLASS_NAME = class_name
+          * 透過標籤的 class 屬性搜尋
+          * 字串內有空格的話要改為「.」
+        * NAME = name
+        * LINK_TEXT = link_text
+          * 透過連結標籤的文字搜尋
+        * PARTIAL_LINK_TEXT = partial_link_text
+        * TAG_NAME = tag_name
+          * 使用 TAG 選擇器特別要注意的是，HTML 標籤時常重複，因此 TAG 選擇器通常適用於抓取大框架的網頁元素再做細部搜尋
+        * XPATH = xpath
+          * 用於在 XML 文檔中定位節點的語言(想像網頁是圖書館，而各個網頁元素是書籍，XPath 就有點類似於目錄編號，可以直接查找)
+          * 原因：當想要查找的元素沒有合適的 id 或 name 屬性時，可以使用 XPath 以絕對路徑(不建議使用)定位元素，也可以利用已知特殊 id 或 name 屬性的元素的相對路徑定位
+          * XPath 包含來自 HTML 所有元素的位置(絕對路徑)，因此，僅對網頁進行一點點調整就可能導致失敗(超級容易失敗，要不斷維護)
+          * 步驟
+            * 打開網頁檢視器，找到目標網頁元素的內容
+            * 在內容上點擊右鍵 → Copy→Copy (full) XPath，獲取絕對或相對 XPath
+            * 將複製下來的 XPath 貼上
+        * CSS_SELECTOR = css_selector
+          * 「/」改寫成「>」
+          * 「//」改寫成「 (空格)」
+          * 用 id 查找「#」
+          * 用 classname 查找「.」
+          * 參考網頁：[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)
+      * 取得標籤的資訊
+        * 取得標籤的內部文字
+          ```
+          element = driver.find_element(搜尋欄位, '搜尋條件')
+          element.text
+          ```
+        * 取得標籤的某個屬性
+          ```
+          element = driver.find_element(搜尋欄位, '搜尋條件')
+          element.get_attribute('屬性名稱')
+          ```
+        * 模擬使用者點擊標籤
+          ```
+          element = driver.find_element(搜尋欄位, '搜尋條件')
+          element.click()
+          ```
+  * Requests
+    * 指令：
+      ```
+      res = requests.get(url)
+      > 返回 200：請求成功
+      > 返回 404、400：請求失敗
+      
+      res = requests.get(url, headers=headers)
+      # 請求頭信息偽裝為瀏覽器，可以更好地請求數據信息
+      
+      res.text
+      ```
+    * 介紹：對網路發動請求的套件，可實作對網頁做 get、post 等 HTTP 協定的行為，請求網站獲取網頁數據
+  * BeautifulSoup
+    * 指令：
+      ```
+      soup = BeautifulSoup(res.text, 'html.parser')
+      infos = soup.select('路徑')  #路徑提取方式：在固定位置右鍵->copy->copy selector
+      ```
+    * 介紹：借助網頁的結構特性來解析網頁的工具，可透過 Requests 提取 HTML 標籤裡的元素，對網頁進行解析得到結構化的數據
+  * Lxml
+    * 指令：
+      ```
+      From lxml import etree
+      Html = etree.HTML(text)
+      infos = Html.xpath('路徑')  #路徑提取方式：在固定位置右鍵->copy->copy xpath
+      ```
+    * 介紹：Lxml 為 XML 解析庫，可修正 HTML 代碼，形成結構化的 HTML 結構
+* 重要查詢
+  * 查詢設定：conda config --show
+  * 查詢 proxy
+    ```
+    import urllib
+    urllib.request.getproxies()
+    ```
+* 重要說明
+  * headers：用來讓瀏覽器向伺服器表明自己的身分，有些 HTTP 伺服器僅允許來自普通瀏覽器的請求，而不接受來自程式腳本的請求
+    * 經常用於「偽裝」User-Agent
+    * Mozilla Firefox 的 header 的值為 "Mozilla/5.0 (X11; U; Linux i686) Gecko/20071127 Firefox/2.0.0.11"
+    * urllib 的 header 的值為 "Python-urllib/2.6"
+    * 執行方式：Mozilla、AppleWebKit、Chrome，解析網頁：用 text/html 的方式，以 UTF-8 的格式去做解析
+      ```
+      headers = {
+         'content-type': 'text/html; charset=UTF-8',
+         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
+      }
+      ```
+  * https://stevenjhu.com/2022/02/13/python%E7%88%AC%E8%9F%B2web-crawler-%E6%93%8D%E4%BD%9C-cookie%E3%80%81request-headers/
+  * https://www.learncodewithmike.com/2020/06/how-to-scrape-different-pages-using-python-scraper.html
 <br>
 
 
@@ -84,7 +179,11 @@
       ```
   * 範例三：遇到按鈕
     * 進入網站後會看到讓使用者點選「是否已滿18歲」按鈕
-    * 先開啟瀏覽器開發者模式(F12)，並點選至network(網路)，觀察點選「已滿18歲」後，會送給伺服器之封包內容
+    * 說明：
+      * Cookie：網站存放在瀏覽器的一小段內容
+      * 與伺服器互動：連線時，Cookie 放在 Request Headers 中送出
+      * 先開啟瀏覽器開發者模式(F12)，並點選至network(網路)，觀察點選「已滿18歲」後，會送給伺服器之封包內容，意即透過「檢視原始碼」→「Application」→「Cookies」觀察重要的 Cookie
+    * 詳如：爬蟲_簡易說明
 * 範例：模擬點擊
   ```
   from selenium import webdriver
@@ -125,5 +224,33 @@
 <br>
 
 
+## 查詢
+* Windows
+  * 檢視 IP Address
+    * 指令：ipconfig
+    * 結果：如果 IP Address 顯示為 0.0.0.0 或 169.x.x.x 則無法上網
+  * 測試網站是否活著
+    * 指令：ping 目的地網站名稱或IP Address
+    * 結果：如果出現 Request timed out. 就表示該網站和我們電腦間的網路連線無法建立
+  * 追蹤網路路徑
+    * 指令：tracert 目的地網站名稱或IP Address
+  * 測試網頁服務(HTTP)
+    * 指令：
+      * telnet 目的地網站名稱或IP Address 80
+      * telnet 目的地網站名稱或IP Address 443
+* Linux
+  * 測試網站是否活著
+    * 指令：ping 目的地網站名稱或IP Address
+    * 停止輸出：ctrl+c
+  * 追蹤網路路徑
+    * 指令：traceroute 目的地網站名稱或IP Address
+<br>
+
+
 ## 參考資料
 * [Python爬蟲小人生](https://ithelp.ithome.com.tw/articles/10202121)
+* [如何使用Webdriver、send_keys](https://medium.com/marketingdatascience/selenium%E6%95%99%E5%AD%B8-%E4%B8%80-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8webdriver-send-keys-988816ce9bed)
+* [Selenium教學：如何使用find_element(s)取得任何網頁上能看到的內容](https://medium.com/marketingdatascience/%E5%8B%95%E6%85%8B%E7%B6%B2%E9%A0%81%E7%88%AC%E8%9F%B2%E7%AC%AC%E4%BA%8C%E9%81%93%E9%8E%96-selenium%E6%95%99%E5%AD%B8-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8find-element-s-%E5%8F%96%E5%BE%97%E7%B6%B2%E9%A0%81%E5%85%83%E7%B4%A0-%E9%99%84python-%E7%A8%8B%E5%BC%8F%E7%A2%BC-b66920fc8cab)
+* [網路問題判斷](http://wiki.kmu.edu.tw/index.php/%E7%B6%B2%E8%B7%AF%E5%95%8F%E9%A1%8C%E5%88%A4%E6%96%B7)
+* [Python爬虫基础库和实践](https://blog.csdn.net/weixin_39618456/article/details/112153519)
+* [用來開啟 URLs 的可擴充函式庫](https://docs.python.org/zh-tw/3/library/urllib.request.html)
