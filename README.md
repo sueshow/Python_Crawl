@@ -517,8 +517,9 @@
   * 下載特定網址資料
     ```
     import urllib.request as req
-    with req.urlopen(網址) as response:
-       data = response.read()
+    url = 網址
+    with req.urlopen(url) as response:
+       data = response.read().decode('utf-8')  # 取得網址的原始碼(HTML、CSS、JS)
     print(data)
     ```
 <br>
