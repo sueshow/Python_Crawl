@@ -185,12 +185,12 @@
       ```
     * 介紹：對網路發動請求的套件，可實作對網頁做 get、post 等 HTTP 協定的行為，請求網站獲取網頁數據
     * 類型
-      <table border="1" width="18%">
+      <table border="1" width="20%">
         <tr>
-          <th width="3%"> HTTP 方法	</a>
-          <th width="5%"> requests 方法 </a>
+          <th width="2%"> HTTP 方法	</a>
+          <th width="3%"> requests 方法 </a>
           <th width="10%"> 說明 </a>
-          <th width="10%"> 備註 </a>
+          <th width="5%"> 備註 </a>
         </tr>
         <tr>
           <td> GET </td>
