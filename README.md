@@ -75,23 +75,24 @@
 ## 工具介紹
 * 搭配使用工具
   * Webdriver 
-    * 不同瀏覽器會有不同的 driver，如[Chrome](https://chromedriver.chromium.org/downloads)、[Edge](https://developer.microsoft.com/zh-tw/microsoft-edge/tools/webdriver/)、[Firefox]()、[Safari](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari)，需下載目前瀏覽器版本的 Webdriver
-    * Chromedriver：其他瀏覽器類似
-      ```
-      # 載入需要的套件
-      from selenium import webdriver
+    * WebDriver 是用來執行並操作瀏覽器的 API 介面，每一個瀏覽器都會有各自對應的驅動程式 ( driver )，Selenium 會透過 WebDriver 來直接對瀏覽器進行操作，將所支援的瀏覽器進行自動化作業，就如同真的使用者在操作
+    * 不同瀏覽器會有不同的 driver，如[Chrome](https://chromedriver.chromium.org/downloads)、[Edge](https://developer.microsoft.com/zh-tw/microsoft-edge/tools/webdriver/)、[Firefox]()、[Safari](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari)，需[下載](https://steam.oxxostudio.tw/category/python/spider/selenium.html)目前瀏覽器版本的 Webdriver
+      * Chromedriver：其他瀏覽器類似
+        ```
+        # 載入需要的套件
+        from selenium import webdriver
     
-      # 開啟瀏覽器視窗(Chrome)
-      # 方法一：執行前需開啟chromedriver.exe且與執行檔在同一個工作目錄
-      driver = webdriver.Chrome()
-      # 方法二：或是直接指定exe檔案路徑
-      driver = webdriver.Chrome('桌面\chromedriver')
+        # 開啟瀏覽器視窗(Chrome)
+        # 方法一：執行前需開啟chromedriver.exe且與執行檔在同一個工作目錄
+        driver = webdriver.Chrome('./chromedriver')    # 指向 chromedriver 的位置
+        # 方法二：或是直接指定exe檔案路徑
+        driver = webdriver.Chrome('桌面\chromedriver')
     
-      # get()：輸入網址，即可前往特定網頁
-      driver.get('http://www.google.com') # 更改網址以前往不同網頁
-      # close()：可關閉目前網頁視窗
-      driver.close() # 關閉瀏覽器視窗
-      ```
+        # get()：輸入網址，即可前往特定網頁
+        driver.get('https://www.google.com') # 更改網址以前往不同網頁
+        # close()：可關閉目前網頁視窗
+        driver.close() # 關閉瀏覽器視窗
+        ```
   * 額外工具
     * [SelectorGadget](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb?hl=zh-TW)
     * [Quick Javascript Switcher](https://chrome.google.com/webstore/detail/quick-javascript-switcher/geddoclleiomckbhadiaipdggiiccfje)
@@ -101,11 +102,12 @@
     * macOS：請按 option+command+c
 * 套件
   * Selenium
-    * 指令：
+    * 介紹：可模擬出使用者在瀏覽器的所有操作行為 (點擊按鈕、輸入帳號密碼、捲動捲軸...等)，因此除了爬蟲的應用，也常作為「自動化測試」使用的工具
+    * 指令
       ```
       from selenium import webdriver
       # 請求頭信息偽裝為瀏覽器，可以更好地請求數據信息
-      user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15"
+      user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15'
       opt = webdriver.ChromeOptions()
       # 加入 headers 資訊
       opt.add_argument('--user-agent=%s' % user_agent)
@@ -120,9 +122,8 @@
       })
       driver.get('要爬的網址')
       ```
-    * 介紹：提供簡單的 API(Application Programming Interface) 應用程式介面
     * 使用規則
-      * 兩種函數找出 WebElement
+      * 取得網頁元素：兩種函數找出 WebElement
         * find_element：抓取符合條件的第一個項目，可搭配 By 方法
         * find_elements：抓取所有符合條件的項目，並回傳成 list
       * 八種方法
@@ -168,8 +169,137 @@
           element = driver.find_element(搜尋欄位, '搜尋條件')
           element.click()
           ```
+      * 操作網頁元素
+        * 方法
+          <table border="1" width="20%">
+            <tr>
+              <th width="2%"> 方法	</a>
+              <th width="2%"> ActionChains 參數 </a>
+              <th width="6%"> 說明 </a>
+              <th width="2%"> 方法	</a>
+              <th width="2%"> ActionChains 參數 </a>
+              <th width="6%"> 說明 </a>
+            </tr>
+            <tr>
+              <td> click() </td>
+              <td> element </td>
+              <td> 按下滑鼠左鍵 </td>
+              <td> click_and_hold() </td>
+              <td> element </td>
+              <td> 滑鼠左鍵按著不放 </td>
+            </tr>
+            <tr>
+              <td> double_click() </td>
+              <td> element </td>
+              <td> 連續按兩下滑鼠左鍵 </td>
+              <td> context_click() </td>
+              <td> element </td>
+              <td> 按下滑鼠右鍵 (需搭配指定元素定位) </td>
+            </tr>
+            <tr>
+              <td> drag_and_drop() </td>
+              <td> source, target </td>
+              <td> 點擊 source 元素後，移動到 target 元素放開 </td>
+              <td> drag_and_drop_by_offset() </td>
+              <td> source, x, y </td>
+              <td> 點擊 source 元素後，移動到指定的座標位置放開 </td>
+            </tr>
+            <tr>
+              <td> release() </td>
+              <td> element </td>
+              <td> 放開滑鼠 </td>
+              <td> move_by_offset() </td>
+              <td> x, y </td>
+              <td> 移動滑鼠座標到指定位置 </td>
+            </tr>
+            <tr>
+              <td> move_to_element() </td>
+              <td> element </td>
+              <td> 移動滑鼠到某個元素上 </td>
+              <td> move_to_element_with_offset() </td>
+              <td> element, x, y </td>
+              <td> 移動滑鼠到某個元素的相對座標位置 </td>
+            </tr>
+            <tr>
+              <td> send_keys() </td>
+              <td> values </td>
+              <td> 送出某個鍵盤按鍵值 </td>
+              <td> send_keys_to_element() </td>
+              <td> element, values </td>
+              <td> 向某個元素發送鍵盤按鍵值 </td>
+            </tr>
+            <tr>
+              <td> key_down() </td>
+              <td> value </td>
+              <td> 按著鍵盤某個鍵 </td>
+              <td> key_up() </td>
+              <td> value </td>
+              <td> 放開鍵盤某個鍵 </td>
+            </tr>
+            <tr>
+              <td> reset_actions() </td>
+              <td>  </td>
+              <td> 清除儲存的動作 (實測沒有作用，查訊後是 Bug) </td>
+              <td> pause() </td>
+              <td> seconds </td>
+              <td> 暫停動作 </td>
+            </tr>
+            <tr>
+              <td> perform() </td>
+              <td>  </td>
+              <td> 執行儲存的動作 </td>
+              <td>  </td>
+              <td>  </td>
+              <td>  </td>
+            </tr>
+          </table>
+        * 要使用這些方法的方式有兩種
+          * 第一種「針對指定元素呼叫方法」：只要針對指定的元素，呼叫指定的方法，就會執行對應的動作，只能使用 click、send_keys等
+            ```
+            from selenium import webdriver
+            from time import sleep
+
+            driver = webdriver.Chrome('./chromedriver')
+            driver.get('https://example.oxxostudio.tw/python/selenium/demo.html')
+            a = driver.find_element_by_id('a')
+            add = driver.find_element_by_id('add')
+            a.click()     # 點擊按鈕 A，出現 a 文字
+            sleep(1)
+            add.click()   # 點擊 add 按鈕，出現 數字 1
+            add.click()   # 點擊 add 按鈕，出現 數字 2
+            sleep(1)
+            add.click()   # 點擊 add 按鈕，出現 數字 3
+            sleep(1)
+            add.click()   # 點擊 add 按鈕，出現 數字 4
+            ```
+          * 第二種「使用ActionChains」：將所有需要執行的方法串成「鏈」，全部完成後執行 perform() 執行所有的過程
+            ```
+            from selenium import webdriver
+            from selenium.webdriver.common.action_chains import ActionChains
+
+            driver = webdriver.Chrome('./chromedriver')
+            driver.get('https://example.oxxostudio.tw/python/selenium/demo.html')
+            a = driver.find_element_by_id('a')
+            add = driver.find_element_by_id('add')
+            actions = ActionChains(driver)                                        # 使用 ActionChains 的方式
+            actions.click(a).pause(1)                                             # 點擊按鈕 A，出現 a 文字後，暫停一秒
+            actions.double_click(add).pause(1).click(add).pause(1).click(add)     # 連點 add 按鈕，等待一秒後再次點擊，等待一秒後再次點擊
+            actions.perform()  # 執行儲存的動作
+            ```
+        * 取得網頁元素的內容
+          * text：元素的內容文字
+          * get_attribute：元素的某個 HTML 屬性值
+          * id：元素的 id
+          * tag_name：元素的 tag 名稱
+          * size：元素的長寬尺寸
+          * screenshot：將某個元素截圖並儲存為 png
+          * is_displayed()：元素是否顯示在網頁上
+          * is_enabled()：元素是否可用
+          * is_selected()：元素是否被選取
+          * parent：元素的父元素。
   * Requests
-    * 指令：
+    * 介紹：對網路發動請求的套件，可實作對網頁做 get、post 等 HTTP 協定的行為，請求網站獲取網頁數據
+    * 指令
       ```
       import requests
       url = '要爬的網址'
@@ -182,7 +312,6 @@
       res.encoding = 'utf8'
       print(res.text)
       ```
-    * 介紹：對網路發動請求的套件，可實作對網頁做 get、post 等 HTTP 協定的行為，請求網站獲取網頁數據
     * 類型
       <table border="1" width="20%">
         <tr>
@@ -274,13 +403,108 @@
             <td>  </td>
           </tr>
         </table>
+    * 傳遞參數
+      * headers
+        * 用途：讓瀏覽器向伺服器表明自己的身分，有些 HTTP 伺服器僅允許來自普通瀏覽器的請求，而不接受來自程式腳本的請求
+        * 經常用於「偽裝」User-Agent
+        * Mozilla Firefox 的 header 的值為 'Mozilla/5.0 (X11; U; Linux i686) Gecko/20071127 Firefox/2.0.0.11'
+        * urllib 的 header 的值為 'Python-urllib/2.6'
+        * 執行方式：Mozilla、AppleWebKit、Chrome，解析網頁：用 text/html 的方式，以 UTF-8 的格式去做解析
+          ```
+          headers = {
+             'content-type': 'text/html; charset=UTF-8',
+             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
+          }
+          ```
+      * cookies：設定 Request 中的 cookie (dict)
+      * auth：支持 HTTP 認證功能 (tuple)
+      * json：	JSON 格式的數據，作為 Request 的內容
+      * files：傳輸文件 (dict)
+      * timeout：設定超時時間，以「秒」為單位
+      * proxies：設定訪問代理伺服器，可以增加認證 (dict)
+      * allow_redirects：True/False，預設 True，意即重新定向
+      * stream：True/False，預設 True，意即獲取內容立即下載
+      * verify：True/False，預設 True，意即認證 SSL
+      * cert：本機 SSL 路徑
   * BeautifulSoup
-    * 指令：
+    * 介紹
+      * 借助網頁的結構特性來解析網頁的工具
+      * 分析網頁的 HTML 與 XML 文件，並將分析的結果轉換成「網頁標籤樹」(tag) 的型態，讓資料讀取方式更接近網頁的操作語法，處理起來也更為便利
+      * 通常會搭配 requests 爬取網頁內容一併使用
+    * 指令
       ```
-      soup = BeautifulSoup(res.text, 'html.parser')
-      infos = soup.select('路徑')  #路徑提取方式：在固定位置右鍵->copy->copy selector
+      import requests
+      from bs4 import BeautifulSoup
+      
+      url = 'https://water.taiwanstat.com/'
+      web = requests.get(url)                        # 取得網頁內容
+      soup = BeautifulSoup(web.text, 'html.parser')  # 轉換成標籤樹
+      
+      title = soup.title                             # 取得 title
+      
+      print(soup.find_all('a'))                      # 等同於下方的 soup('a')
+      print(soup('a'))                               # 等同於上方的 find_all('a')
+      infos = soup.select('路徑')                     # 路徑提取方式：在固定位置右鍵->copy->copy selector
       ```
-    * 介紹：借助網頁的結構特性來解析網頁的工具，可透過 Requests 提取 HTML 標籤裡的元素，對網頁進行解析得到結構化的數據
+    * 說明
+      * 網頁是由「標籤」的語法所構成，標籤 (tag) 指的是由「<」和「>」包覆的代碼
+      * 解析器：html5lib 的容錯率比 html.parser 高，但解析速度比較慢
+        * Python 本身內建「html.parser」的解析器
+        * 另外安裝「html5lib」解析器不需要 import，安裝後就可以使用
+          ```
+          pip install html5lib
+          ```
+    * Beautiful Soup 的方法
+      <table border="1" width="30%">
+          <tr>
+            <th width="5%"> 方法	</a>
+            <th width="10%"> 說明 </a>
+            <th width="5%"> 方法	</a>
+            <th width="10%"> 說明 </a>
+          </tr>
+          <tr>
+            <td> select() </td>
+            <td> 以 CSS 選擇器的方式尋找指定的 tag </td>
+            <td>  </td>
+            <td>  </td>
+          </tr>
+          <tr>
+            <td> find_all()、find()</td>
+            <td> 以所在的 tag 位置，尋找內容裡所有的 tag 或第一個指定的 tag </td>
+            <td> find_parents()、find_parent() </td>
+            <td> 以所在的 tag 位置，尋找父層所有指定的 tag 或第一個找到的 tag </td>
+          </tr>
+          <tr>
+            <td> find_next_siblings()、find_next_sibling() </td>
+            <td> 以所在的 tag 位置，尋找同一層後方所有指定的 tag 或第一個找到的 tag </td>
+            <td> find_previous_siblings()、find_previous_sibling() </td>
+            <td> 以所在的 tag 位置，尋找同一層前方所有指定的 tag 或第一個找到的 tag </td>
+          </tr>
+          <tr>
+            <td> find_all_next()、find_next() </td>
+            <td> 以所在的 tag 位置，尋找後方內容裡所有指定的 tag 或第一個找到的 tag </td>
+            <td> find_all_previous()、find_previous() </td>
+            <td> 所在的 tag 位置，尋找前方內容裡所有指定的 tag 或第一個找到的 tag </td>
+          </tr>
+      </table>
+    * Beautiful Soup 方法的參數 
+      * string：搜尋 tag 包含的文字
+      * limit：搜尋 tag 後只回傳多少個結果
+      * recursive：預設 True，會搜尋內容所有層，設定 False 只會搜尋下一層
+      * id：搜尋 tag 的 id
+      * class_：搜尋 tag class，因為 class 為 Python 保留字，所以後方要加上底線
+      * href：搜尋 tag href
+      * attrs：搜尋 tag attribute 屬性
+    * 取得並輸出內容
+      * .get_text()：輸出 tag 的內容
+      * [屬性]：輸出 tag 裡某個屬性的內容
+        ```
+        url = 'https://www.iana.org/domains/'
+        web = requests.get(url)
+        soup = BeautifulSoup(web.text, 'html.parser')
+        print(soup.find('a').get_text())   # 輸出第一個 a tag 的內容
+        print(soup.find('a')['href'])      # 輸出第一個 a tag 的 href 屬性內容
+        ```
   * Lxml
     * 指令：
       ```
@@ -292,28 +516,8 @@
 <br>
 
 
-## 重要
-* 重要查詢
-  * 查詢設定：conda config --show
-  * 查詢 proxy
-    ```
-    import urllib
-    urllib.request.getproxies()
-    ```
-* 重要說明
-  * headers：用來讓瀏覽器向伺服器表明自己的身分，有些 HTTP 伺服器僅允許來自普通瀏覽器的請求，而不接受來自程式腳本的請求
-    * 經常用於「偽裝」User-Agent
-    * Mozilla Firefox 的 header 的值為 "Mozilla/5.0 (X11; U; Linux i686) Gecko/20071127 Firefox/2.0.0.11"
-    * urllib 的 header 的值為 "Python-urllib/2.6"
-    * 執行方式：Mozilla、AppleWebKit、Chrome，解析網頁：用 text/html 的方式，以 UTF-8 的格式去做解析
-      ```
-      headers = {
-         'content-type': 'text/html; charset=UTF-8',
-         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
-      }
-      ```
-  * https://stevenjhu.com/2022/02/13/python%E7%88%AC%E8%9F%B2web-crawler-%E6%93%8D%E4%BD%9C-cookie%E3%80%81request-headers/
-  * https://www.learncodewithmike.com/2020/06/how-to-scrape-different-pages-using-python-scraper.html
+* https://stevenjhu.com/2022/02/13/python%E7%88%AC%E8%9F%B2web-crawler-%E6%93%8D%E4%BD%9C-cookie%E3%80%81request-headers/
+* https://www.learncodewithmike.com/2020/06/how-to-scrape-different-pages-using-python-scraper.html
 <br>
 
 
@@ -408,6 +612,22 @@
       # 刪除原本已輸入的文字
       element.clear()
       ```
+    * 滾動網頁捲軸
+      ```
+      driver.execute_script('window.scrollTo(0, 500)')   # 捲動到 500px 位置
+      sleep(1)
+      
+      h1 = driver.find_element_by_tag_name('h1')
+      h3 = driver.find_element_by_tag_name('h3')
+      script = '''
+        let h1 = arguments[0];
+        let h3 = arguments[1];
+        alert(h1, h3)
+      '''
+      driver.execute_script(script, h1, h3)   # 執行 JavaScript，印出元素
+      sleep(2)
+      Alert(driver).accept()    # 點擊提示視窗的確認按鈕，關閉提示視窗
+      ```
     * 瀏覽網頁的瀏覽紀錄
       ```
       # 前往下一項
@@ -419,6 +639,13 @@
 
 
 ## 查詢
+* Python 查詢
+  * 查詢設定：conda config --show
+  * 查詢 proxy
+    ```
+    import urllib
+    urllib.request.getproxies()
+    ``` 
 * 網路狀況
   * Windows
     * 檢視 IP Address
