@@ -515,13 +515,25 @@
       ```
     * 介紹：Lxml 為 XML 解析庫，可修正 HTML 代碼，形成結構化的 HTML 結構
   * 下載特定網址資料
-    ```
-    import urllib.request as req
-    url = 網址
-    with req.urlopen(url) as response:
-       data = response.read().decode('utf-8')  # 取得網址的原始碼(HTML、CSS、JS)
-    print(data)
-    ```
+    * 一般格式
+      ```
+      import urllib.request as req
+      
+      url = 網址
+      with req.urlopen(url) as response:
+          data = response.read().decode('utf-8')  # 取得網址的原始碼(HTML、CSS、JS)
+      print(data)
+      ```
+    * JSON
+      ```
+      import urllib.request as req
+      import json
+      
+      url = 'https://data.taipei/api/v1/dataset/296acfa2-5d93-4706-ad58-e83cc951863c?scope=resourceAquire'
+      with req.urlopen(url) as response:
+          data = json.load(response)  # 利用 json 模組處理 json 資料格式
+      print(data)
+      ```
 <br>
 
 
