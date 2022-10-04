@@ -19,9 +19,9 @@
 * 反爬蟲機制
   <table border="1" width="30%">
     <tr>
-        <th width="3%"> 機制	</a>
+        <th width="2%"> 機制	</a>
         <th width="10%"> 說明 </a>
-        <th width="15%"> 作法 </a>
+        <th width="16%"> 作法 </a>
         <th width="2%"> 破解難度 </a>
     </tr>
     <tr>
