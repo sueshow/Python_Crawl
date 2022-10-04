@@ -514,6 +514,13 @@
       infos = Html.xpath('路徑')  #路徑提取方式：在固定位置右鍵->copy->copy xpath
       ```
     * 介紹：Lxml 為 XML 解析庫，可修正 HTML 代碼，形成結構化的 HTML 結構
+  * 下載特定網址資料
+    ```
+    import urllib.request as req
+    with req.urlopen(網址) as response:
+       data = response.read()
+    print(data)
+    ```
 <br>
 
 
