@@ -175,7 +175,6 @@
       url = '要爬的網址'
       res = requests.get(url)
       # 返回 200：請求成功
-      # 返回 404、400：請求失敗
       
       # 請求頭信息偽裝為瀏覽器，可以更好地請求數據信息
       headers = {'user-agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36'}
@@ -419,26 +418,67 @@
 <br>
 
 
-## 查詢網路狀況
-* Windows
-  * 檢視 IP Address
-    * 指令：ipconfig
-    * 結果：如果 IP Address 顯示為 0.0.0.0 或 169.x.x.x 則無法上網
-  * 測試網站是否活著
-    * 指令：ping 目的地網站名稱或IP Address
-    * 結果：如果出現 Request timed out. 就表示該網站和我們電腦間的網路連線無法建立
-  * 追蹤網路路徑
-    * 指令：tracert 目的地網站名稱或IP Address
-  * 測試網頁服務(HTTP)
-    * 指令：
-      * telnet 目的地網站名稱或IP Address 80
-      * telnet 目的地網站名稱或IP Address 443
-* Linux
-  * 測試網站是否活著
-    * 指令：ping 目的地網站名稱或IP Address
-    * 停止輸出：ctrl+c
-  * 追蹤網路路徑
-    * 指令：traceroute 目的地網站名稱或IP Address
+## 查詢
+* 網路狀況
+  * Windows
+    * 檢視 IP Address
+      * 指令：ipconfig
+      * 結果：如果 IP Address 顯示為 0.0.0.0 或 169.x.x.x 則無法上網
+    * 測試網站是否活著
+      * 指令：ping 目的地網站名稱或IP Address
+      * 結果：如果出現 Request timed out. 就表示該網站和我們電腦間的網路連線無法建立
+    * 追蹤網路路徑
+      * 指令：tracert 目的地網站名稱或IP Address
+    * 測試網頁服務(HTTP)
+      * 指令：
+        * telnet 目的地網站名稱或IP Address 80
+        * telnet 目的地網站名稱或IP Address 443
+  * Linux
+    * 測試網站是否活著
+      * 指令：ping 目的地網站名稱或IP Address
+      * 停止輸出：ctrl+c
+    * 追蹤網路路徑
+      * 指令：traceroute 目的地網站名稱或IP Address
+* [HTTP 狀態代碼](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status)
+  <table border="1" width="10%">
+          <tr>
+            <th width="2%"> 狀態代碼	</a>
+            <th width="3%"> 說明 </a>
+            <th width="2%"> 狀態代碼	</a>
+            <th width="3%"> 說明 </a>
+          </tr>
+          <tr>
+            <td> 200 </td>
+            <td> 網頁正常 </td>
+            <td> 301 </td>
+            <td> 網頁搬家，重新導向到新的網址 </td>
+          </tr>
+          <tr>
+            <td> 400 </td>
+            <td> 錯誤的要求 </td>
+            <td> 401 </td>
+            <td> 未授權，需要憑證 </td>
+          </tr>
+          <tr>
+            <td> 403 </td>
+            <td>	沒有權限 </td>
+            <td> 404 </td>
+            <td> 找不到網頁 </td>
+          </tr>
+          <tr>
+            <td> 500 </td>
+            <td> 伺服器錯誤 </td>
+            <td> 503 </td>
+            <td> 伺服器暫時無法處理請求 (附載過大) </td>
+          </tr>
+          <tr>
+            <td> 504 </td>
+            <td> 伺服器沒有回應 </td>
+            <td>  </td>
+            <td>  </td>
+          </tr>
+  </table>
+* 
 <br>
 
 
