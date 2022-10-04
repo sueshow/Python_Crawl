@@ -228,12 +228,12 @@
 
 
 ## 範例
-* PTT資訊版
-  * 範例一：文章標題
+* requests：
+  * 範例一 ：PTT 資訊版爬取文章標題
     * 網址：https://www.ptt.cc/bbs/MobileComm/index.html
     * import Python套件
       ```
-      import requests
+      import requests   
       from bs4 import BeautifulSoup 
       ```
     * 將網頁 Get 下來
@@ -251,7 +251,7 @@
       for s in sel:
         print(s['href'], s.text) 
       ```
-  * 範例二：爬多頁資料
+  * 範例二：PTT Joke版爬取多頁資料
     * 觀察下一頁按鈕的HTML標籤內容，發現上一頁按鈕的 a 標籤中有上一頁的網址為「/bbs/joke/index8140.html」
       ```
       r = requests.get('https://www.ptt.cc/bbs/joke/index.html')
@@ -273,57 +273,58 @@
       for s in sel: #印出網址跟標題
         print(s['href'], s.text)
       ```
-  * 範例三：遇到按鈕
+  * 範例三：PTT 八卦版遇到按鈕
     * 進入網站後會看到讓使用者點選「是否已滿18歲」按鈕
     * 說明：
       * Cookie：網站存放在瀏覽器的一小段內容
       * 與伺服器互動：連線時，Cookie 放在 Request Headers 中送出
       * 先開啟瀏覽器開發者模式(F12)，並點選至network(網路)，觀察點選「已滿18歲」後，會送給伺服器之封包內容，意即透過「檢視原始碼」→「Application」→「Cookies」觀察重要的 Cookie
     * 詳如：爬蟲_簡易說明
-* 範例：模擬點擊
-  ```
-  from selenium import webdriver
+* selenium
+  * 範例：模擬點擊
+    ```
+    from selenium import webdriver
   
-  driver = webdriver.Chrome()
-  driver.get('http://www.google.com') # 更改網址以前往不同網頁
-  ```
-  ```
-  # 情境一：搜尋輸入
-  # 定位搜尋框
-  element = driver.find_element(by=By.CLASS_NAME, value='gLFyf.gsfi')
+    driver = webdriver.Chrome()
+    driver.get('http://www.google.com') # 更改網址以前往不同網頁
+    ```
+    * 情境一：搜尋輸入
+      ```
+      # 定位搜尋框
+      element = driver.find_element(by=By.CLASS_NAME, value='gLFyf.gsfi')
 
-  # 傳入字串
-  element.send_keys('Selenium Python')
+      # 傳入字串
+      element.send_keys('Selenium Python')
   
-  # 點擊搜尋按鈕
-  button = driver.find_element(by=By.CLASS_NAME, value='gNO89b')
-    # 點擊搜尋按鈕
-  button.click()
+      # 點擊搜尋按鈕
+      button = driver.find_element(by=By.CLASS_NAME, value='gNO89b')
+        # 點擊搜尋按鈕
+      button.click()
   
-    # 反爬蟲：點擊搜尋按鈕
-  from selenium.webdriver.common.action_chains import ActionChains
-  actions = ActionChains(element)
-  actions.move_to_element(button).click(button)   # 滑鼠先移到 button 上，然後再點擊 button
-  actions.perform()
-  ```
-  ```
-  # 情境二：刪除輸入
-  # 定位搜尋框
-  element = driver.find_element(by=By.CLASS_NAME, value='gLFyf.gsfi')
+        # 反爬蟲：點擊搜尋按鈕
+      from selenium.webdriver.common.action_chains import ActionChains
+      actions = ActionChains(element)
+      actions.move_to_element(button).click(button)   # 滑鼠先移到 button 上，然後再點擊 button
+      actions.perform()
+      ```
+    * 情境二：刪除輸入
+      ```
+      # 定位搜尋框
+      element = driver.find_element(by=By.CLASS_NAME, value='gLFyf.gsfi')
 
-  # 傳入字串
-  element.send_keys('Selenium Python')
+      # 傳入字串
+      element.send_keys('Selenium Python')
   
-  # 刪除原本已輸入的文字
-  element.clear()
-  ```
-  ```
-  # 瀏覽網頁的瀏覽紀錄
-  # 前往下一項
-  driver.forward()
-  # 前往上一項
-  driver.back()
-  ```
+      # 刪除原本已輸入的文字
+      element.clear()
+      ```
+    * 瀏覽網頁的瀏覽紀錄
+      ```
+      # 前往下一項
+      driver.forward()
+      # 前往上一項
+      driver.back()
+      ```
 <br>
 
 
