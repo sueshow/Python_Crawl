@@ -519,7 +519,6 @@
 ## 範例
 * requests：
   * 範例一 ：【PTT 資訊版】爬取文章標題
-    * 網址：https://www.ptt.cc/bbs/MobileComm/index.html
     * import Python套件
       ```
       import requests   
