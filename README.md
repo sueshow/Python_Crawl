@@ -514,6 +514,7 @@
       infos = Html.xpath('路徑')  #路徑提取方式：在固定位置右鍵->copy->copy xpath
       ```
     * 介紹：Lxml 為 XML 解析庫，可修正 HTML 代碼，形成結構化的 HTML 結構
+    * 範例：詳如「爬蟲_股票資料_xpath.ipynb」之 HTML
   * 下載特定網址資料
     * 一般格式
       ```
@@ -534,6 +535,7 @@
           data = json.load(response)  # 利用 json 模組處理 json 資料格式
       print(data)
       ```
+    * 範例：詳如「爬蟲_簡易說明」之範例四~六
 <br>
 
 
@@ -588,7 +590,7 @@
       * Cookie：網站存放在瀏覽器的一小段內容
       * 與伺服器互動：連線時，Cookie 放在 Request Headers 中送出
       * 先開啟瀏覽器開發者模式(F12)，並點選至network(網路)，觀察點選「已滿18歲」後，會送給伺服器之封包內容，意即透過「檢視原始碼」→「Application」→「Cookies」觀察重要的 Cookie
-    * 詳如：爬蟲_簡易說明
+    * 範例：詳如「爬蟲_簡易說明.ipynb」之範例三
     * 參考網頁
       * [Python 爬蟲](https://stevenjhu.com/2022/02/13/python%E7%88%AC%E8%9F%B2web-crawler-%E6%93%8D%E4%BD%9C-cookie%E3%80%81request-headers/)
       * [Python 網路連線程式、公開資料串接 By 彭彭](https://www.youtube.com/watch?v=sUzR3QVBKIo)
