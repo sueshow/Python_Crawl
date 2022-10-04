@@ -31,9 +31,15 @@
         <td> 低 </td>
     </tr>  
     <tr>
+        <td> 清空 window.navigator </td>
+        <td> 有些反爬蟲的網頁，會檢測瀏覽器的 window.navigator 是否包含 webdriver 屬性，在正常使用瀏覽器的情況下，webdriver 屬性是 undefined，一旦使用了 selenium 函式庫，這個屬性就被初始化為 true </td>
+        <td> 程式使用 selenium webdriver 的 execute_cdp_cmd 的方法，將 webdriver 設定為 undefined (詳如 selenium 說明) </td>
+        <td>  </td>
+    </tr> 
+    <tr>
         <td> 使用動態頁面 </td>
         <td> 將網頁內容全部由動態產生，大幅增加爬蟲處理網頁結構的複雜度 </td>
-        <td> 中低 </td>
+        <td> 只要確認動態頁面的架構，就能進行破解，如果打開的網頁是動態頁面，「檢視網頁原始碼」時看到的結構往往會很簡單，通常都只會是一些簡單的 HTML、CSS 和壓縮過的 js 文件 </td>
         <td> 中低 </td>
     </tr>  
     <tr>
@@ -68,27 +74,50 @@
 * 搭配使用工具
   * Webdriver 
     * 不同瀏覽器會有不同的 driver，如[Chrome](https://chromedriver.chromium.org/downloads)、[Edge](https://developer.microsoft.com/zh-tw/microsoft-edge/tools/webdriver/)、[Firefox]()、[Safari](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari)，需下載目前瀏覽器版本的 Webdriver
-  * Chromedriver：其他瀏覽器類似
-    ```
-    # 載入需要的套件
-    from selenium import webdriver
+    * Chromedriver：其他瀏覽器類似
+      ```
+      # 載入需要的套件
+      from selenium import webdriver
     
-    # 開啟瀏覽器視窗(Chrome)
-    # 方法一：執行前需開啟chromedriver.exe且與執行檔在同一個工作目錄
-    driver = webdriver.Chrome()
-    # 方法二：或是直接指定exe檔案路徑
-    driver = webdriver.Chrome('桌面\chromedriver')
+      # 開啟瀏覽器視窗(Chrome)
+      # 方法一：執行前需開啟chromedriver.exe且與執行檔在同一個工作目錄
+      driver = webdriver.Chrome()
+      # 方法二：或是直接指定exe檔案路徑
+      driver = webdriver.Chrome('桌面\chromedriver')
     
-    # get()：輸入網址，即可前往特定網頁
-    driver.get('http://www.google.com') # 更改網址以前往不同網頁
-    # close()：可關閉目前網頁視窗
-    driver.close() # 關閉瀏覽器視窗
-    ```
-  * 打開網頁檢視器，網頁看得到的內容一定抓得下來
+      # get()：輸入網址，即可前往特定網頁
+      driver.get('http://www.google.com') # 更改網址以前往不同網頁
+      # close()：可關閉目前網頁視窗
+      driver.close() # 關閉瀏覽器視窗
+      ```
+  * 額外工具
+    * [SelectorGadget](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb?hl=zh-TW)
+    * [Quick Javascript Switcher](https://chrome.google.com/webstore/detail/quick-javascript-switcher/geddoclleiomckbhadiaipdggiiccfje)
+    * [XPath Helper](https://chrome.google.com/webstore/detail/xpath-helper/hgimnogjllphhhkhlmebbmlgjoejdpjl?hl=zh-TW)
+  * 網頁檢視器：網頁中看得到的內容一定抓得下來
     * Windows：請按 f12、ctrl+shift+i
     * macOS：請按 option+command+c
 * 套件
   * Selenium
+    * 指令：
+      ```
+      from selenium import webdriver
+      # 請求頭信息偽裝為瀏覽器，可以更好地請求數據信息
+      user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15"
+      opt = webdriver.ChromeOptions()
+      # 加入 headers 資訊
+      opt.add_argument('--user-agent=%s' % user_agent)
+      driver = webdriver.Chrome('./chromedriver', options=opt)
+      # 清空 window.navigator
+      driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+          "source": """
+            Object.defineProperty(navigator, 'webdriver', {
+              get: () => undefined
+            })
+          """
+      })
+      driver.get('要爬的網址')
+      ```
     * 介紹：提供簡單的 API(Application Programming Interface) 應用程式介面
     * 使用規則
       * 兩種函數找出 WebElement
@@ -140,14 +169,17 @@
   * Requests
     * 指令：
       ```
+      import requests
+      url = '要爬的網址'
       res = requests.get(url)
-      > 返回 200：請求成功
-      > 返回 404、400：請求失敗
+      # 返回 200：請求成功
+      # 返回 404、400：請求失敗
       
-      res = requests.get(url, headers=headers)
       # 請求頭信息偽裝為瀏覽器，可以更好地請求數據信息
-      
-      res.text
+      headers = {'user-agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36'}
+      res = requests.get(url, headers=headers)
+      res.encoding = 'utf8'
+      print(res.text)
       ```
     * 介紹：對網路發動請求的套件，可實作對網頁做 get、post 等 HTTP 協定的行為，請求網站獲取網頁數據
   * BeautifulSoup
@@ -165,7 +197,10 @@
       infos = Html.xpath('路徑')  #路徑提取方式：在固定位置右鍵->copy->copy xpath
       ```
     * 介紹：Lxml 為 XML 解析庫，可修正 HTML 代碼，形成結構化的 HTML 結構
+<br>
 
+
+## 重要
 * 重要查詢
   * 查詢設定：conda config --show
   * 查詢 proxy
