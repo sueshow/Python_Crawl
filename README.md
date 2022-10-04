@@ -229,6 +229,52 @@
           <td>  </td>
         </tr>
       </table>
+    * Response 物件的屬性與方法
+      * 說明：當伺服器收到 requests HTTP 方法所發出的請求後，會傳回一個 Response 物件，物件裡包含伺服器回應的訊息資訊，可以透過下列的屬性與方法，查詢相關內容 (bytes 表示資料以 bytes 表示，str 以字串表示，dict 以字典表示)
+        <table border="1" width="20%">
+          <tr>
+            <th width="2%"> Response 物件	</a>
+            <th width="8%"> 說明 </a>
+            <th width="2%"> Response 物件	</a>
+            <th width="8%"> 說明 </a>
+          </tr>
+          <tr>
+            <td> url </td>
+            <td> 資源的 URL 位址 </td>
+            <td> content </td>
+            <td> 回應訊息的內容 (bytes) </td>
+          </tr>
+          <tr>
+            <td> text </td>
+            <td> 回應訊息的內容字串 (str) </td>
+            <td> raw </td>
+            <td> 原始回應訊息串流 (bytes) </td>
+          </tr>
+          <tr>
+            <td> status_code </td>
+            <td> 回應的狀態 (int) </td>
+            <td> encoding </td>
+            <td> 回應訊息的編碼 </td>
+          </tr>
+          <tr>
+            <td> headers </td>
+            <td> 回應訊息的標頭 (dict) </td>
+            <td> cookies </td>
+            <td> 回應訊息的 cookies (dict) </td>
+          </tr>
+          <tr>
+            <td> history </td>
+            <td> 請求歷史 (list) </td>
+            <td> json() </td>
+            <td> 將回應訊息進行 JSON 解碼後回傳 (dict) </td>
+          </tr>
+          <tr>
+            <td> rasise_for_status() </td>
+            <td> 檢查是否有例外發生，如果有就拋出例外 </td>
+            <td>  </td>
+            <td>  </td>
+          </tr>
+        </table>
   * BeautifulSoup
     * 指令：
       ```
@@ -274,7 +320,7 @@
 
 ## 範例
 * requests：
-  * 範例一 ：PTT 資訊版爬取文章標題
+  * 範例一 ：【PTT 資訊版】爬取文章標題
     * 網址：https://www.ptt.cc/bbs/MobileComm/index.html
     * import Python套件
       ```
@@ -296,7 +342,7 @@
       for s in sel:
         print(s['href'], s.text) 
       ```
-  * 範例二：PTT Joke版爬取多頁資料
+  * 範例二：【PTT Joke版】爬取多頁資料
     * 觀察下一頁按鈕的HTML標籤內容，發現上一頁按鈕的 a 標籤中有上一頁的網址為「/bbs/joke/index8140.html」
       ```
       r = requests.get('https://www.ptt.cc/bbs/joke/index.html')
@@ -318,7 +364,7 @@
       for s in sel: #印出網址跟標題
         print(s['href'], s.text)
       ```
-  * 範例三：PTT 八卦版遇到按鈕
+  * 範例三：【PTT 八卦版】遇到按鈕
     * 進入網站後會看到讓使用者點選「是否已滿18歲」按鈕
     * 說明：
       * Cookie：網站存放在瀏覽器的一小段內容
