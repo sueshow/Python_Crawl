@@ -17,11 +17,11 @@
   * 確認網站是否有提供 API：節省讀取與分析網站 HTML 的時間
   * 注意 robots.txt：規範一個網站允許什麼樣的 User-Agent 訪問，也會規範 Crawl-delay 訪問間隔時間，如果 Crawl-delay 設定 1，表示這個網站期望每次訪問的時間間隔一秒鐘
 * 反爬蟲機制
-  <table border="1" width="15%">
+  <table border="1" width="30%">
     <tr>
         <th width="3%"> 機制	</a>
         <th width="10%"> 說明 </a>
-        <th width="10%"> 作法 </a>
+        <th width="15%"> 作法 </a>
         <th width="2%"> 破解難度 </a>
     </tr>
     <tr>
@@ -45,25 +45,27 @@
     <tr>
         <td> 加入使用者行為判斷 </td>
         <td> 在網頁的某些元素，加入使用者行為的判斷，例如滑鼠移動順序、滑鼠是否接觸...等，增加爬蟲處理的難度 </td>
-        <td> 中 </td>
+        <td> 確認頁面加入的使用者行為，就能模擬並進行破解，<br>
+             如：有些網頁會在按鈕加上「滑鼠碰觸」的保護，如果不是真的用滑鼠碰觸，只是用程式撰寫「點擊」指令，就會被當作爬蟲而被阻擋，模故擬出先碰觸元素，再進行點擊的動作，藉此突破這個反爬蟲的機制 (詳如模擬點擊說明) <br>
+             如：有些網頁也會判斷使用者刷新網頁的時間 (通常使用者不會在極短的時間內連續刷新)，這時也可以使用 time 函式庫的 sleep 方法讓網頁有所等待，避開這個檢查機制 </td>
         <td> 中 </td>
     </tr> 
     <tr>
-        <td> 模擬真實用戶登入授權 </td>
+        <td> 提交使用者授權 </td>
         <td> 在使用者登入時，會將使用者的授權 (token) 加入瀏覽器的 Cookie 當中，藉由判斷 Cookie 確認使用者是否合法 </td>
-        <td> 中 </td>
+        <td> 只要知道 request 與 response 的機制後，取得 Cookie 內的 token 就能破解 </td>
         <td> 中 </td>
     </tr> 
     <tr>
-        <td> 加入驗證碼機制 </td>
+        <td> 破解驗證碼 </td>
         <td> 相當常見的驗證機制，可相當程度的防堵惡意的干擾與攻擊，對於非人類操作與大量頻繁操作都有不錯的防範機制 (如防堵高鐵搶票、演唱會搶票...等) </td>
-        <td> 高 </td>
+        <td> 必須搭配一些 AI 來處理圖形、數字、文字的識別，通常只要能識別驗證碼就能破解，要破解一般驗證碼，需要先將網頁上的驗證碼圖片下載，再將圖片提交到 2Captcha 服務來幫我們進行辨識 </td>
         <td> 高 </td>
     </tr>
     <tr>
-        <td> 封鎖代理伺服器與第三方 IP </td>
+        <td> 破解代理伺服器與第三方 IP 封鎖 </td>
         <td> 針對惡意攻擊的 IP 進行封鎖 </td>
-        <td> 高 </td>
+        <td> 通常必須更換 IP 或更換代理伺服器才能破解，許多網站上也有提供免費的 Proxy IP，以 Free Proxy List 網站為例，就能取得許多免費的 Proxy IP </td>
         <td> 高 </td>
     </tr>
   </table>
@@ -295,7 +297,14 @@
   
   # 點擊搜尋按鈕
   button = driver.find_element(by=By.CLASS_NAME, value='gNO89b')
+    # 點擊搜尋按鈕
   button.click()
+  
+    # 反爬蟲：點擊搜尋按鈕
+  from selenium.webdriver.common.action_chains import ActionChains
+  actions = ActionChains(element)
+  actions.move_to_element(button).click(button)   # 滑鼠先移到 button 上，然後再點擊 button
+  actions.perform()
   ```
   ```
   # 情境二：刪除輸入
