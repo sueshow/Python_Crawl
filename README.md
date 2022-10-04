@@ -7,7 +7,64 @@
 <br>
 
 
-## 重要介紹
+## 爬蟲
+* 說明：可「自動」瀏覽全球資訊網的網路機器人，許多的搜尋入口網站 (如 Google)，都會透過網路爬蟲收集網路上的各種資訊，進一步分析後成為使用者搜尋的資料，許多開發者也會自行開發不同的爬蟲程式，進行大數據收集與分析
+* 類型
+  * 靜態爬蟲：網站完成一個請求 (request) 與回應 (response) 後，用戶端即不再與伺服器有任何的交流，所有的互動都只與瀏覽器的網頁互動，資訊不會傳遞到後端伺服器
+  * 動態爬蟲：網站會依照使用者的行為不斷的與伺服器進行交流，必須要知道網站需要什麼「資訊」，提供正確的資訊，才能取得所需要的資料
+* 使用爬蟲的禮儀
+  * 不造成網站伺服器的負擔：每次爬取資料時，設定適當的等待延遲
+  * 確認網站是否有提供 API：節省讀取與分析網站 HTML 的時間
+  * 注意 robots.txt：規範一個網站允許什麼樣的 User-Agent 訪問，也會規範 Crawl-delay 訪問間隔時間，如果 Crawl-delay 設定 1，表示這個網站期望每次訪問的時間間隔一秒鐘
+* 反爬蟲機制
+  <table border="1" width="15%">
+    <tr>
+        <th width="3%"> 機制	</a>
+        <th width="10%"> 說明 </a>
+        <th width="10%"> 作法 </a>
+        <th width="2%"> 破解難度 </a>
+    </tr>
+    <tr>
+        <td> 判斷瀏覽器 headers 資訊 </td>
+        <td> 利用 headers 判斷來源是否合法，headers 通常會由瀏覽器自動產生，直接透過程式所發出的請求預設沒有 headers </td>
+        <td> 只要能透過爬蟲程式，送出模擬瀏覽器的 headers 資訊，就能進行破解 </td>
+        <td> 低 </td>
+    </tr>  
+    <tr>
+        <td> 使用動態頁面 </td>
+        <td> 將網頁內容全部由動態產生，大幅增加爬蟲處理網頁結構的複雜度 </td>
+        <td> 中低 </td>
+        <td> 中低 </td>
+    </tr>  
+    <tr>
+        <td> 加入使用者行為判斷 </td>
+        <td> 在網頁的某些元素，加入使用者行為的判斷，例如滑鼠移動順序、滑鼠是否接觸...等，增加爬蟲處理的難度 </td>
+        <td> 中 </td>
+        <td> 中 </td>
+    </tr> 
+    <tr>
+        <td> 模擬真實用戶登入授權 </td>
+        <td> 在使用者登入時，會將使用者的授權 (token) 加入瀏覽器的 Cookie 當中，藉由判斷 Cookie 確認使用者是否合法 </td>
+        <td> 中 </td>
+        <td> 中 </td>
+    </tr> 
+    <tr>
+        <td> 加入驗證碼機制 </td>
+        <td> 相當常見的驗證機制，可相當程度的防堵惡意的干擾與攻擊，對於非人類操作與大量頻繁操作都有不錯的防範機制 (如防堵高鐵搶票、演唱會搶票...等) </td>
+        <td> 高 </td>
+        <td> 高 </td>
+    </tr>
+    <tr>
+        <td> 封鎖代理伺服器與第三方 IP </td>
+        <td> 針對惡意攻擊的 IP 進行封鎖 </td>
+        <td> 高 </td>
+        <td> 高 </td>
+    </tr>
+  </table>
+<br>
+
+
+## 工具介紹
 * 搭配使用工具
   * Webdriver 
     * 不同瀏覽器會有不同的 driver，如[Chrome](https://chromedriver.chromium.org/downloads)、[Edge](https://developer.microsoft.com/zh-tw/microsoft-edge/tools/webdriver/)、[Firefox]()、[Safari](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari)，需下載目前瀏覽器版本的 Webdriver
@@ -32,7 +89,6 @@
     * macOS：請按 option+command+c
 * 套件
   * Selenium
-    * 指令：
     * 介紹：提供簡單的 API(Application Programming Interface) 應用程式介面
     * 使用規則
       * 兩種函數找出 WebElement
@@ -57,11 +113,13 @@
             * 打開網頁檢視器，找到目標網頁元素的內容
             * 在內容上點擊右鍵 → Copy→Copy (full) XPath，獲取絕對或相對 XPath
             * 將複製下來的 XPath 貼上
+          * 範例：
         * CSS_SELECTOR = css_selector
-          * 「/」改寫成「>」
-          * 「//」改寫成「 (空格)」
-          * 用 id 查找「#」
-          * 用 classname 查找「.」
+          * 重要
+            * 「/」改寫成「>」
+            * 「//」改寫成「 (空格)」
+            * 用 id 查找「#」
+            * 用 classname 查找「.」
           * 參考網頁：[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)
       * 取得標籤的資訊
         * 取得標籤的內部文字
@@ -107,6 +165,7 @@
       infos = Html.xpath('路徑')  #路徑提取方式：在固定位置右鍵->copy->copy xpath
       ```
     * 介紹：Lxml 為 XML 解析庫，可修正 HTML 代碼，形成結構化的 HTML 結構
+
 * 重要查詢
   * 查詢設定：conda config --show
   * 查詢 proxy
@@ -224,7 +283,7 @@
 <br>
 
 
-## 查詢
+## 查詢網路狀況
 * Windows
   * 檢視 IP Address
     * 指令：ipconfig
@@ -254,3 +313,4 @@
 * [網路問題判斷](http://wiki.kmu.edu.tw/index.php/%E7%B6%B2%E8%B7%AF%E5%95%8F%E9%A1%8C%E5%88%A4%E6%96%B7)
 * [Python爬虫基础库和实践](https://blog.csdn.net/weixin_39618456/article/details/112153519)
 * [用來開啟 URLs 的可擴充函式庫](https://docs.python.org/zh-tw/3/library/urllib.request.html)
+* [Python 網路爬蟲教學](https://steam.oxxostudio.tw/category/python/spider/spider.html)
