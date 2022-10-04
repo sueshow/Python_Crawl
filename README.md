@@ -233,10 +233,10 @@
       * 說明：當伺服器收到 requests HTTP 方法所發出的請求後，會傳回一個 Response 物件，物件裡包含伺服器回應的訊息資訊，可以透過下列的屬性與方法，查詢相關內容 (bytes 表示資料以 bytes 表示，str 以字串表示，dict 以字典表示)
         <table border="1" width="20%">
           <tr>
-            <th width="2%"> Response 物件	</a>
-            <th width="8%"> 說明 </a>
-            <th width="2%"> Response 物件	</a>
-            <th width="8%"> 說明 </a>
+            <th width="3%"> Response 物件	</a>
+            <th width="7%"> 說明 </a>
+            <th width="3%"> Response 物件	</a>
+            <th width="7%"> 說明 </a>
           </tr>
           <tr>
             <td> url </td>
