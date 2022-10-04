@@ -440,8 +440,10 @@
     * 追蹤網路路徑
       * 指令：traceroute 目的地網站名稱或IP Address
 * [HTTP 狀態代碼](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status)
-  <table border="1" width="10%">
+  <table border="1" width="15%">
           <tr>
+            <th width="2%"> 狀態代碼	</a>
+            <th width="3%"> 說明 </a>
             <th width="2%"> 狀態代碼	</a>
             <th width="3%"> 說明 </a>
             <th width="2%"> 狀態代碼	</a>
@@ -452,14 +454,12 @@
             <td> 網頁正常 </td>
             <td> 301 </td>
             <td> 網頁搬家，重新導向到新的網址 </td>
-          </tr>
-          <tr>
             <td> 400 </td>
             <td> 錯誤的要求 </td>
-            <td> 401 </td>
-            <td> 未授權，需要憑證 </td>
           </tr>
           <tr>
+            <td> 401 </td>
+            <td> 未授權，需要憑證 </td>
             <td> 403 </td>
             <td>	沒有權限 </td>
             <td> 404 </td>
@@ -470,12 +470,8 @@
             <td> 伺服器錯誤 </td>
             <td> 503 </td>
             <td> 伺服器暫時無法處理請求 (附載過大) </td>
-          </tr>
-          <tr>
             <td> 504 </td>
             <td> 伺服器沒有回應 </td>
-            <td>  </td>
-            <td>  </td>
           </tr>
   </table>
 * 
