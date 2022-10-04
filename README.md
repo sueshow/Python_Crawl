@@ -569,7 +569,9 @@
       * 與伺服器互動：連線時，Cookie 放在 Request Headers 中送出
       * 先開啟瀏覽器開發者模式(F12)，並點選至network(網路)，觀察點選「已滿18歲」後，會送給伺服器之封包內容，意即透過「檢視原始碼」→「Application」→「Cookies」觀察重要的 Cookie
     * 詳如：爬蟲_簡易說明
-    * 參考網頁：[Python 爬蟲](https://stevenjhu.com/2022/02/13/python%E7%88%AC%E8%9F%B2web-crawler-%E6%93%8D%E4%BD%9C-cookie%E3%80%81request-headers/)
+    * 參考網頁
+      * [Python 爬蟲](https://stevenjhu.com/2022/02/13/python%E7%88%AC%E8%9F%B2web-crawler-%E6%93%8D%E4%BD%9C-cookie%E3%80%81request-headers/)
+      * [Python 網路連線程式、公開資料串接 By 彭彭](https://www.youtube.com/watch?v=sUzR3QVBKIo)
 * selenium
   * 範例：模擬點擊
     ```
