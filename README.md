@@ -184,6 +184,51 @@
       print(res.text)
       ```
     * 介紹：對網路發動請求的套件，可實作對網頁做 get、post 等 HTTP 協定的行為，請求網站獲取網頁數據
+    * 類型
+      <table border="1" width="18%">
+        <tr>
+          <th width="3%"> HTTP 方法	</a>
+          <th width="5%"> requests 方法 </a>
+          <th width="10%"> 說明 </a>
+          <th width="10%"> 備註 </a>
+        </tr>
+        <tr>
+          <td> GET </td>
+          <td> requests.get(url) </td>
+          <td> 向指定資源提交請求，可額外設定 params 參數字典 </td>
+          <td> 提交的參數會放在標頭中傳送 (公開) </td>
+        </tr>
+        <tr>
+          <td> POST </td>
+          <td> requests.post(url) </td>
+          <td> 向指定資源提交請求，可額外設定 data 參數字典 </td>
+          <td> 提交的參數會放在內容中傳送 (隱密) </td>
+        </tr>
+        <tr>
+          <td> PUT </td>
+          <td> requests.put(url) </td>
+          <td> 向指定資源提供最新內容，可額外設定 data 參數字典 </td>
+          <td>  </td>
+        </tr>
+        <tr>
+          <td> DELETE </td>
+          <td> requests.delete(url) </td>
+          <td> 請求刪除指定的資源 </td>
+          <td>  </td>
+        </tr>
+        <tr>
+          <td> HEAD </td>
+          <td> requests.head(url) </td>
+          <td> 請求提供資源的回應標頭 (不含內容) </td>
+          <td>  </td>
+        </tr>
+        <tr>
+          <td> OPTIONS </td>
+          <td> requests.options(url) </td>
+          <td> 請求伺服器提供資源可用的功能選項 </td>
+          <td>  </td>
+        </tr>
+      </table>
   * BeautifulSoup
     * 指令：
       ```
