@@ -76,7 +76,8 @@
 * 搭配使用工具
   * Webdriver 
     * WebDriver 是用來執行並操作瀏覽器的 API 介面，每一個瀏覽器都會有各自對應的驅動程式 ( driver )，Selenium 會透過 WebDriver 來直接對瀏覽器進行操作，將所支援的瀏覽器進行自動化作業，就如同真的使用者在操作
-    * 不同瀏覽器會有不同的 driver，如[Chrome](https://chromedriver.chromium.org/downloads)、[Edge](https://developer.microsoft.com/zh-tw/microsoft-edge/tools/webdriver/)、[Firefox]()、[Safari](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari)，需[下載](https://steam.oxxostudio.tw/category/python/spider/selenium.html)目前瀏覽器版本的 Webdriver
+    * 不同瀏覽器會有不同的 driver，如[Chrome](https://chromedriver.chromium.org/downloads)、[Edge](https://developer.microsoft.com/zh-tw/microsoft-edge/tools/webdriver/)、[Firefox]()、[Safari](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari)，需下載目前瀏覽器版本的 Webdriver
+      * [下載版本查詢](https://steam.oxxostudio.tw/category/python/spider/selenium.html)
       * Chromedriver：其他瀏覽器類似
         ```
         # 載入需要的套件
