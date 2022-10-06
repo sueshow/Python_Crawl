@@ -8,9 +8,9 @@
 
 
 ## 爬蟲
-* 說明：可「自動」瀏覽全球資訊網的網路機器人，許多的搜尋入口網站 (如 Google)，都會透過網路爬蟲收集網路上的各種資訊，進一步分析後成為使用者搜尋的資料，許多開發者也會自行開發不同的爬蟲程式，進行大數據收集與分析
+* 說明：可「自動」瀏覽全球資訊網的網路機器人，許多的搜尋入口網站(如 Google)，都會透過網路爬蟲收集網路上的各種資訊，進一步分析後成為使用者搜尋的資料，許多開發者也會自行開發不同的爬蟲程式，進行大數據收集與分析
 * 類型
-  * 靜態爬蟲：網站完成一個請求 (request) 與回應 (response) 後，用戶端即不再與伺服器有任何的交流，所有的互動都只與瀏覽器的網頁互動，資訊不會傳遞到後端伺服器
+  * 靜態爬蟲：網站完成一個請求(request)與回應(response) 後，用戶端即不再與伺服器有任何的交流，所有的互動都只與瀏覽器的網頁互動，資訊不會傳遞到後端伺服器
   * 動態爬蟲：網站會依照使用者的行為不斷的與伺服器進行交流，必須要知道網站需要什麼「資訊」，提供正確的資訊，才能取得所需要的資料
 * 使用爬蟲的禮儀
   * 不造成網站伺服器的負擔：每次爬取資料時，設定適當的等待延遲
@@ -46,19 +46,19 @@
         <td> 加入使用者行為判斷 </td>
         <td> 在網頁的某些元素，加入使用者行為的判斷，例如滑鼠移動順序、滑鼠是否接觸...等，增加爬蟲處理的難度 </td>
         <td> 確認頁面加入的使用者行為，就能模擬並進行破解，<br>
-             如：有些網頁會在按鈕加上「滑鼠碰觸」的保護，如果不是真的用滑鼠碰觸，只是用程式撰寫「點擊」指令，就會被當作爬蟲而被阻擋，模故擬出先碰觸元素，再進行點擊的動作，藉此突破這個反爬蟲的機制 (詳如模擬點擊說明) <br>
-             如：有些網頁也會判斷使用者刷新網頁的時間 (通常使用者不會在極短的時間內連續刷新)，這時也可以使用 time 函式庫的 sleep 方法讓網頁有所等待，避開這個檢查機制 </td>
+             如：有些網頁會在按鈕加上「滑鼠碰觸」的保護，如果不是真的用滑鼠碰觸，只是用程式撰寫「點擊」指令，就會被當作爬蟲而被阻擋，模故擬出先碰觸元素，再進行點擊的動作，藉此突破這個反爬蟲的機制(詳如模擬點擊說明) <br>
+             如：有些網頁也會判斷使用者刷新網頁的時間(通常使用者不會在極短的時間內連續刷新)，這時也可以使用 time 函式庫的 sleep 方法讓網頁有所等待，避開這個檢查機制 </td>
         <td> 中 </td>
     </tr> 
     <tr>
         <td> 提交使用者授權 </td>
-        <td> 在使用者登入時，會將使用者的授權 (token) 加入瀏覽器的 Cookie 當中，藉由判斷 Cookie 確認使用者是否合法 </td>
+        <td> 在使用者登入時，會將使用者的授權(token)加入瀏覽器的 Cookie 當中，藉由判斷 Cookie 確認使用者是否合法 </td>
         <td> 只要知道 request 與 response 的機制後，取得 Cookie 內的 token 就能破解 </td>
         <td> 中 </td>
     </tr> 
     <tr>
         <td> 破解驗證碼 </td>
-        <td> 相當常見的驗證機制，可相當程度的防堵惡意的干擾與攻擊，對於非人類操作與大量頻繁操作都有不錯的防範機制 (如防堵高鐵搶票、演唱會搶票...等) </td>
+        <td> 相當常見的驗證機制，可相當程度的防堵惡意的干擾與攻擊，對於非人類操作與大量頻繁操作都有不錯的防範機制(如防堵高鐵搶票、演唱會搶票...等) </td>
         <td> 必須搭配一些 AI 來處理圖形、數字、文字的識別，通常只要能識別驗證碼就能破解，要破解一般驗證碼，需要先將網頁上的驗證碼圖片下載，再將圖片提交到 2Captcha 服務來幫我們進行辨識 </td>
         <td> 高 </td>
     </tr>
@@ -75,7 +75,7 @@
 ## 工具介紹
 * 搭配使用工具
   * Webdriver 
-    * WebDriver 是用來執行並操作瀏覽器的 API 介面，每一個瀏覽器都會有各自對應的驅動程式 ( driver )，Selenium 會透過 WebDriver 來直接對瀏覽器進行操作，將所支援的瀏覽器進行自動化作業，就如同真的使用者在操作
+    * WebDriver 是用來執行並操作瀏覽器的 API 介面，每一個瀏覽器都會有各自對應的驅動程式(driver)，Selenium 會透過 WebDriver 來直接對瀏覽器進行操作，將所支援的瀏覽器進行自動化作業，就如同真的使用者在操作
     * 不同瀏覽器會有不同的 driver，如[Chrome](https://chromedriver.chromium.org/downloads)、[Edge](https://developer.microsoft.com/zh-tw/microsoft-edge/tools/webdriver/)、[Firefox]()、[Safari](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari)，需下載目前瀏覽器版本的 Webdriver
       * [下載版本查詢](https://steam.oxxostudio.tw/category/python/spider/selenium.html)
       * Chromedriver：其他瀏覽器類似
@@ -84,9 +84,9 @@
         from selenium import webdriver
     
         # 開啟瀏覽器視窗(Chrome)
-        # 方法一：執行前需開啟chromedriver.exe且與執行檔在同一個工作目錄
+        # 方法一：執行前需開啟 chromedriver.exe 且與執行檔在同一個工作目錄
         driver = webdriver.Chrome('./chromedriver')    # 指向 chromedriver 的位置
-        # 方法二：或是直接指定exe檔案路徑
+        # 方法二：或是直接指定 exe 檔案路徑
         driver = webdriver.Chrome('桌面\chromedriver')
     
         # get()：輸入網址，即可前往特定網頁
@@ -103,7 +103,8 @@
     * macOS：請按 option+command+c
 * 套件
   * Selenium
-    * 介紹：可模擬出使用者在瀏覽器的所有操作行為 (點擊按鈕、輸入帳號密碼、捲動捲軸...等)，因此除了爬蟲的應用，也常作為「自動化測試」使用的工具
+    * 介紹：可模擬出使用者在瀏覽器的所有操作行為(點擊按鈕、輸入帳號密碼、捲動捲軸...等)，因此除了爬蟲的應用，也常作為「自動化測試」使用的工具
+    * 優點：可模擬使用者的動作，進行登入後爬取資料或滾動卷軸，並且能夠執行 JavaScript 程式碼
     * 指令
       ```
       from selenium import webdriver
@@ -325,13 +326,13 @@
           <td> GET </td>
           <td> requests.get(url) </td>
           <td> 向指定資源提交請求，可額外設定 params 參數字典 </td>
-          <td> 提交的參數會放在標頭中傳送 (公開) </td>
+          <td> 就像明信片，需要撰寫目的地的地址及內容，其中的地址就像是請求的網址，而內容就像是接在網址後面的參數(querystring)，提交的參數會放在標頭中傳送(公開) </td>
         </tr>
         <tr>
           <td> POST </td>
           <td> requests.post(url) </td>
           <td> 向指定資源提交請求，可額外設定 data 參數字典 </td>
-          <td> 提交的參數會放在內容中傳送 (隱密) </td>
+          <td> 就像一般的信件，需撰寫目的地的地址，而信件內容會在信封中，提交的參數會放在內容中傳送(隱密) </td>
         </tr>
         <tr>
           <td> PUT </td>
@@ -348,7 +349,7 @@
         <tr>
           <td> HEAD </td>
           <td> requests.head(url) </td>
-          <td> 請求提供資源的回應標頭 (不含內容) </td>
+          <td> 請求提供資源的回應標頭(不含內容) </td>
           <td>  </td>
         </tr>
         <tr>
@@ -359,7 +360,7 @@
         </tr>
       </table>
     * Response 物件的屬性與方法
-      * 說明：當伺服器收到 requests HTTP 方法所發出的請求後，會傳回一個 Response 物件，物件裡包含伺服器回應的訊息資訊，可以透過下列的屬性與方法，查詢相關內容 (bytes 表示資料以 bytes 表示，str 以字串表示，dict 以字典表示)
+      * 說明：當伺服器收到 requests HTTP 方法所發出的請求後，會傳回一個 Response 物件，物件裡包含伺服器回應的訊息資訊，可以透過下列的屬性與方法，查詢相關內容(bytes 表示資料以 bytes 表示，str 以字串表示，dict 以字典表示)
         <table border="1" width="20%">
           <tr>
             <th width="3%"> Response 物件	</a>
@@ -371,31 +372,31 @@
             <td> url </td>
             <td> 資源的 URL 位址 </td>
             <td> content </td>
-            <td> 回應訊息的內容 (bytes) </td>
+            <td> 回應訊息的內容(bytes) </td>
           </tr>
           <tr>
             <td> text </td>
-            <td> 回應訊息的內容字串 (str) </td>
+            <td> 回應訊息的內容字串(str) </td>
             <td> raw </td>
-            <td> 原始回應訊息串流 (bytes) </td>
+            <td> 原始回應訊息串流(bytes) </td>
           </tr>
           <tr>
             <td> status_code </td>
-            <td> 回應的狀態 (int) </td>
+            <td> 回應的狀態(int) </td>
             <td> encoding </td>
             <td> 回應訊息的編碼 </td>
           </tr>
           <tr>
             <td> headers </td>
-            <td> 回應訊息的標頭 (dict) </td>
+            <td> 回應訊息的標頭(dict) </td>
             <td> cookies </td>
-            <td> 回應訊息的 cookies (dict) </td>
+            <td> 回應訊息的 cookies(dict) </td>
           </tr>
           <tr>
             <td> history </td>
-            <td> 請求歷史 (list) </td>
+            <td> 請求歷史(list) </td>
             <td> json() </td>
-            <td> 將回應訊息進行 JSON 解碼後回傳 (dict) </td>
+            <td> 將回應訊息進行 JSON 解碼後回傳(dict) </td>
           </tr>
           <tr>
             <td> rasise_for_status() </td>
@@ -417,12 +418,12 @@
              'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
           }
           ```
-      * cookies：設定 Request 中的 cookie (dict)
-      * auth：支持 HTTP 認證功能 (tuple)
+      * cookies：設定 Request 中的 cookie(dict)
+      * auth：支持 HTTP 認證功能(tuple)
       * json：	JSON 格式的數據，作為 Request 的內容
-      * files：傳輸文件 (dict)
+      * files：傳輸文件(dict)
       * timeout：設定超時時間，以「秒」為單位
-      * proxies：設定訪問代理伺服器，可以增加認證 (dict)
+      * proxies：設定訪問代理伺服器，可以增加認證(dict)
       * allow_redirects：True/False，預設 True，意即重新定向
       * stream：True/False，預設 True，意即獲取內容立即下載
       * verify：True/False，預設 True，意即認證 SSL
