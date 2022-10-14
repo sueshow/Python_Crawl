@@ -7,6 +7,113 @@
 <br>
 
 
+## 剖析網頁原始內容
+* 常見剖析 HTML 原始碼的方式有三種
+  * 正則表示式(Regular Expression)：容易被網站的小改動影響
+  * 當成 HTML 處理
+    * Beautiful Soup(簡稱 bs4)是最常看到用來操作 HTML 的套件
+      * `html.parser` 來剖析 HTML
+      * 搜尋方法
+        * 用 `.` 直接取到節點
+        * 字串：指定要搜尋的標籤名稱
+          ```
+          # 搜尋標籤 "b"
+          soup.find_all('b')
+          # [<b>The Dormouse's story</b>]
+          ```
+        * 正規表示式：利用 Python re 物件的 search() 方法來搜尋符合的標籤名稱
+          ```
+          # 搜尋以 "b" 開頭的標籤
+          import re
+          for tag in soup.find_all(re.compile("^b")):
+              print(tag.name)
+          # body
+          # b
+          ```
+        * 清單：指定多個要搜尋的標籤名稱  
+          * 指令：find_all(name, attrs, recursive, string, limit, **kwargs)
+            * 範例
+              ```
+              # 搜尋標籤 "a" 和 "b"
+              soup.find_all(["a", "b"])
+              ```
+            * 參數說明
+              * name：帶入前面介紹的「過濾器」
+              * attrs：傳入 dict 物件，用屬性來過濾
+              * recursive：使用布林值(預設是 True)，用來設定是否要遞迴往下找
+              * string：帶入「過濾器」，用標籤的文字內容來過濾
+              * limit：指定要回傳幾個結果
+              * keyword arguments：跟 attrs 參數一樣是用屬性來過濾，絕大多數的情況下用 kwargs 就可以，只有一些特殊狀況(保留字、屬性名稱與方法參數名稱相同、kebab-case)會需要用 attrs 參數來處理
+        * 方法：定義一個會回傳布林的方法物件來判斷是否要傳回標籤
+          ```
+          # 判斷標籤是否定義 class 屬性且無定義 id 屬性
+          tag.has_attr('class') and not tag.has_attr('id')
+          ```
+      * 支援 `lxml` 和 `html5lib`
+        * 一般建議使用比較快的 lxml，使用 XPath 定位資料
+        * 安裝套件
+          ```
+          pip install lxml
+          ```
+        * 方法：用 lxml 的 etree.HTML() 方法載入 HTML 原始資料後，可以用 .xpath() 方法來執行 XPath 查詢
+        * XPath 常用語法
+          * 選擇節點
+            <table border="1" width="30%">
+              <tr>
+                <th width="2%"> 語法	</a>
+                <th width="5%"> 說明 </a>
+                <th width="2%"> 語法 </a>
+                <th width="5%"> 說明 </a>
+              </tr>
+              <tr>
+                <td> node-name </td>
+                <td> 選擇名稱等於 node-name 的節點 </td>
+                <td> / </td>
+                <td> 選擇直屬於當前節點的所有節點(子節點) </td>
+              </tr> 
+              <tr>
+                <td> // </td>
+                <td> 選擇當前節點下所有節點(子孫節點) </td>
+                <td> . </td>
+                <td> 選擇當前節點 </td>
+              </tr>
+              <tr>
+                <td> .. </td>
+                <td> 選擇上一層節點(父節點) </td>
+                <td> @ </td>
+                <td> 選擇屬性 </td>
+              </tr>
+            </table>
+          * 範例說明：HTML 原始內容
+            * 基本
+              * /html：取得 html 標籤(以 / 開頭代表從根節點開始找)
+              * /html/body/a：取得 body 下所有 a 標籤
+              * //a：取得所有 a 標籤
+              * /html/body//a：取得 body 下所有 a 標籤
+              * //a/@href：取得所有 a 標籤的 href 屬性
+            * 進階判斷式(predicates)
+              * /html/body//a[1]：取得 body 下第一個 a 標籤
+              * /html/body//a[last() - 1]：取得 body 下最後一個 a 標籤
+              * /html/body//a[position() < 3]：取得 body 下前兩個 a 標籤
+              * //p[@class]：取得有定義 class 屬性的 p 標籤
+              * //p[@class='title']：取得 class 屬性值為 title 的 p 標籤
+            * 選取任意節點：
+              * `*`：任意標籤
+              * `@*`：任意屬性
+              * `｜`：一次查詢多組路徑
+              * 範例
+                * /html/body/*：取得 body 標籤的全部子節點
+                * /html/body//*：取得 body 下全部標籤
+                * //p[@*]：取得至少有定義一個屬性的 p 標籤
+                * //p | //a：一次取得全部 p 標籤和 a 標籤
+    * 載入 HTML 字串
+      * `prettify()`：回傳剖析器處理完後格式化的字串
+      * 注意同樣的原始碼在不同剖析器可能會有不同的結果
+  * 當成 XML 處理
+* 
+<br>
+
+
 ## 爬蟲
 * 說明：可「自動」瀏覽全球資訊網的網路機器人，許多的搜尋入口網站(如 Google)，都會透過網路爬蟲收集網路上的各種資訊，進一步分析後成為使用者搜尋的資料，許多開發者也會自行開發不同的爬蟲程式，進行大數據收集與分析
 * 類型
