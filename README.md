@@ -736,5 +736,6 @@
 * [用來開啟 URLs 的可擴充函式庫](https://docs.python.org/zh-tw/3/library/urllib.request.html)
 * [Python 網路爬蟲教學](https://steam.oxxostudio.tw/category/python/spider/spider.html)
 * [Python網頁爬蟲動態翻頁的實作技巧](https://www.learncodewithmike.com/2020/06/how-to-scrape-different-pages-using-python-scraper.html)
+* [剖析網頁原始內容](https://ithelp.ithome.com.tw/articles/10218067)
 
 * https://www.junk-call.com/tw/
