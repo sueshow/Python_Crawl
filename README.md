@@ -833,6 +833,13 @@
 <br>
 
 
+## 查詢網站 TLS 資訊的方法
+* 使用F12鍵查看Security
+* 網站：https://www.ssllabs.com/ssltest/
+* 網站：https://www.cdn77.com/tls-test
+<br>
+
+
 ## 參考資料
 * [Python爬蟲小人生](https://ithelp.ithome.com.tw/articles/10202121)
 * [如何使用Webdriver、send_keys](https://medium.com/marketingdatascience/selenium%E6%95%99%E5%AD%B8-%E4%B8%80-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8webdriver-send-keys-988816ce9bed)
